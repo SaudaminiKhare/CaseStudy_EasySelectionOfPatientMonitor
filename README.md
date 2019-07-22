@@ -1,6 +1,5 @@
 # CaseStudy_EasySelectionOfPatientMonitor
 
-Description
 User is a clinical person seeking help about Philips Patient Monitoring equipment. The Philips site to look for equipment is:
 https://www.philips.co.in/healthcare/solutions/patient-monitoring/patient-monitoring
 However, there are simply too many choices to make there. This project makes it easier to choose one using a Chatbot.
