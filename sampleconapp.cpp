@@ -25,6 +25,7 @@ int main()
 	CA obj1;
 	obj1.input();   // CA::input(&obj1);
 	obj1.print();   // CA::print(&obj1);
-	system("pause");
+	cin.ignore();
+	cin.get();
 	return 0;
 }
