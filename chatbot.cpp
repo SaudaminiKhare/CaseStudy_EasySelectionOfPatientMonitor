@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 class prop
@@ -66,5 +67,8 @@ int main()
 	{
 		cout << input[j] << " ";
 	}
+
+
+
 	return 0;
 }
