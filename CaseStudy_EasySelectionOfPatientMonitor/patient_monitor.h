@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<string.h>
 #include<limits>
@@ -31,7 +32,7 @@ int input[no_monitors] = { 0 };
 void readfile()
 {
 	string Features[no_features];
-	ifstream ip("book1.csv");
+	ifstream ip("monitor.csv");
 
 	if (!ip.is_open()) std::cout << "ERROR: File Open" << '\n';
 
@@ -173,6 +174,7 @@ void chat()
 		display(input);
 	}
 }
+
 
 
 
