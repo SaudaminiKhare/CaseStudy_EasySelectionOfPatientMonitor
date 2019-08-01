@@ -6,47 +6,50 @@
 #include<fstream>
 #include <sstream>
 
-using namespace std;
 
-vector<string> display(int[]);
+std::vector<std::string> display(int[]);
 void readfile();
 void chat();
 
 const int no_features = 5;
 const int no_monitors = 10;
 
+//Structure to store monitor and their feature information
 struct PatientMonitor
 {
-	string name;
-	vector<int> FeatureList;
+	std::string name;
+	std::vector<int> FeatureList;
 };
 
 struct PatientMonitor PM[no_monitors];
-string FeatureName[no_features + 1];
+std::string FeatureName[no_features + 1];
 
-string ques;
+std::string ques;
 
-string choice;
+std::string choice;
 
-vector<string> list_monitor;
+std::vector<std::string> list_monitor;
 int input[no_monitors] = { 0 };
 
+
+//Function for reading and storing monitors information from csv file
 void readfile()
 {
-	string Features[no_features];
-	ifstream ip("monitor.csv");
+	std::string Features[no_features];
+	std::ifstream ip("monitor.csv");
 
-	if (!ip.is_open()) cout << "ERROR: File Open" << '\n';
+	if (!ip.is_open()) 
+		std::cout << "ERROR: File Open" << '\n';
 
 	int count = 0;
 
-	string line;
-	getline(ip, line);
-	stringstream ss(line);
-	string token;
+	std::string line;
+	std::getline(ip, line);
+	std::stringstream ss(line);
+	std::string token;
 	int j = 0;
-	getline(ss, token, ',');	//To remove A1 cell
-	while (getline(ss, token, ','))
+	std::getline(ss, token, ',');	//To remove A1 cell
+	while (std::getline(ss, token, ','))
 	{
 		FeatureName[j] = token;
 		//cout << j << FeatureName[j] << endl;
@@ -57,13 +60,13 @@ void readfile()
 
 	while (ip.good())
 	{
-		getline(ip, PM[count].name, ',');
+		std::getline(ip, PM[count].name, ',');
 		for (int i = 0; i < no_features - 1; i++)
 		{
-			getline(ip, Features[i], ',');
+			std::getline(ip, Features[i], ',');
 			PM[count].FeatureList.push_back(stoi(Features[i]));
 		}
-		getline(ip, Features[no_features - 1], '\n');
+		std::getline(ip, Features[no_features - 1], '\n');
 		PM[count].FeatureList.push_back(stoi(Features[no_features - 1]));
 
 		//cout << PM[count].name << endl;
@@ -85,7 +88,9 @@ void readfile()
 	ip.close();
 }
 
-vector<string> display(int input[])
+
+//Function for selecting suitable monitor according to user requirements
+std::vector<std::string> display(int input[])
 {
 
 	int count[no_monitors] = { 0 };
@@ -114,14 +119,15 @@ vector<string> display(int input[])
 			max = count[i];
 		}
 	}
-	cout << "Max = " << max << endl;
+	//cout << "Max = " << max << endl;
 	list_monitor.clear();
+	int i = 1;
 	for (int j = 0; j < no_monitors; j++)
 	{
 		if (count[j] == max)
 		{
 			list_monitor.push_back(PM[j].name);
-			cout << "patient monitor " << PM[j].name << " matches with a score of " << count[j] << "/" << i_sum << endl;
+			std::cout << i++ << ". patient monitor " << PM[j].name << " matches with a score of " << count[j] << "/" << i_sum << std::endl;
 		}
 	}
 	/*for (int j = 0; j < 5; j++)
@@ -135,21 +141,22 @@ vector<string> display(int input[])
 	return list_monitor;
 }
 
-
+//Function for chatting with user
 void chat()
 {
-	vector<string> list_monitor;
-	string name;
-	cout << "Hi there!! What's your name?: ";
-	cin >> name;
-	cout << "Hi " << name << " ! Let me help you in selecting suitable patient monitor.";
+	std::vector<std::string> list_monitor;
+	std::string name;
+	std::cout << "Hi there!! What's your name?       ";
+	std::cin >> name;
+	std::cout << "\nHi " << name << " ! Let me help you in selecting suitable patient monitor.\n\n";
 	for (int i = 0; i < no_features; i++)
 	{
-	l_choice:cout << endl << "Do you want feature " << FeatureName[i] << " ?" << endl;
-		cout << "(Enter y for yes and n nor a no): ";
+	l_choice:std::cout << std::endl << "Do you want feature " << FeatureName[i] << " ??" << std::endl;
+		std::cout << "(Enter y for yes and n for a no): ";
 		while (1)
 		{
-			cin >> choice;
+			std::cin >> choice;
+			std::cout << std::endl;
 			try
 			{
 				if (choice.length() > 1)
@@ -180,28 +187,30 @@ void chat()
 					//}
 					else
 					{
-						cout << "Wrong choice!! \nEnter again :  " ;
+						std::cout << "Wrong choice!! \nEnter again :  " ;
 						continue;
 					}
 				}
 			}
 			catch (...)
 			{
-				cout << endl << "Multiple characters input for choice!" << endl;
-				cout << "Enter choice again!" << endl;
+				std::cout << std::endl << "Multiple characters input for choice!" << std::endl;
+				std::cout << "Enter choice again!" << std::endl;
 				goto l_choice;
 			}
 
 
 		}
-		cout << "Required feautres :";
+		std::cout << "\nRequired feautres :  ";
 		for (int i = 0; i < no_features; i++)
 		{
-			cout << input[i] << " ";
+			if (input[i] == 1)
+				std::cout << FeatureName[i] << "  ";
 		}
+		std::cout << "\n\n";
 		list_monitor = display(input);
 	}
-	for (auto i = list_monitor.begin(); i != list_monitor.end(); ++i)
+	/*for (auto i = list_monitor.begin(); i != list_monitor.end(); ++i)
 		cout << *i << " ";
-	cout << endl;
+	cout << endl;*/
 }
