@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void display(int[]);
+vector<string> display(int[]);
 void readfile();
 void chat();
 
@@ -27,6 +27,8 @@ string FeatureName[no_features + 1];
 string ques;
 
 string choice;
+
+vector<string> list_monitor;
 int input[no_monitors] = { 0 };
 
 void readfile()
@@ -83,7 +85,7 @@ void readfile()
 	ip.close();
 }
 
-void display(int input[])
+vector<string> display(int input[])
 {
 
 	int count[no_monitors] = { 0 };
@@ -113,30 +115,37 @@ void display(int input[])
 		}
 	}
 	cout << "Max = " << max << endl;
+	list_monitor.clear();
 	for (int j = 0; j < no_monitors; j++)
 	{
 		if (count[j] == max)
 		{
+			list_monitor.push_back(PM[j].name);
 			cout << "patient monitor " << PM[j].name << " matches with a score of " << count[j] << "/" << i_sum << endl;
 		}
-
 	}
-	for (int j = 0; j < 5; j++)
+	/*for (int j = 0; j < 5; j++)
 	{
 		cout << input[j] << " ";
-	}
+	}*/
+	
+	/*for (auto i = list_monitor.begin(); i != list_monitor.end(); ++i)
+		cout << *i << " ";
+	cout << endl;*/
+	return list_monitor;
 }
 
 
 void chat()
 {
+	vector<string> list_monitor;
 	string name;
 	cout << "Hi there!! What's your name?: ";
 	cin >> name;
 	cout << "Hi " << name << " ! Let me help you in selecting suitable patient monitor.";
 	for (int i = 0; i < no_features; i++)
 	{
-		l_choice:cout << endl << "Do you want feature " << FeatureName[i] << " ?" << endl;
+	l_choice:cout << endl << "Do you want feature " << FeatureName[i] << " ?" << endl;
 		cout << "(Enter y for yes and n nor a no): ";
 		while (1)
 		{
@@ -171,7 +180,7 @@ void chat()
 					//}
 					else
 					{
-						cout << "Wrong choice!! \nEnter again : " << endl;
+						cout << "Wrong choice!! \nEnter again :  " ;
 						continue;
 					}
 				}
@@ -190,6 +199,9 @@ void chat()
 		{
 			cout << input[i] << " ";
 		}
-		display(input);
+		list_monitor = display(input);
 	}
+	for (auto i = list_monitor.begin(); i != list_monitor.end(); ++i)
+		cout << *i << " ";
+	cout << endl;
 }
