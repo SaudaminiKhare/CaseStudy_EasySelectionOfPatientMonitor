@@ -1,0 +1,6 @@
+﻿  Test_CaseStudy.cpp
+C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Test_CaseStudy\Test_CaseStudy.cpp(21,10): warning C4101:  'cwd': unreferenced local variable
+C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Test_CaseStudy\Test_CaseStudy.cpp(66,10): warning C4101:  'cwd': unreferenced local variable
+C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Test_CaseStudy\Test_CaseStudy.cpp(99,10): warning C4101:  'cwd': unreferenced local variable
+     Creating library C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Debug\Test_CaseStudy.lib and object C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Debug\Test_CaseStudy.exp
+  Test_CaseStudy.vcxproj -> C:\Users\320052309\code\CaseStudy_EasySelectionOfPatientMonitor\Debug\Test_CaseStudy.dll
